@@ -11,6 +11,7 @@ import Teacher from './Teacher';
 
 const stickLength = 80;
 const circRadius = 10; 
+const zzz = 3;
 
 var step_1 = [...Array(10)].map((_, i) => ({
   id: i.toString(),
