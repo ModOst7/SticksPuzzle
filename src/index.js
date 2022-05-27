@@ -10,7 +10,7 @@ import { toBeChecked, toBePartiallyChecked } from '@testing-library/jest-dom/dis
 import Teacher from './Teacher';
 
 const stickLength = 80;
-const circRadius = 10;
+const circRadius = 10; 
 
 var step_1 = [...Array(10)].map((_, i) => ({
   id: i.toString(),
