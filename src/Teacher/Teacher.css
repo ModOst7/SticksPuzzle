@@ -1,0 +1,17 @@
+.teacherContainer {
+    display: flex;
+    width: 64%;
+    flex-direction: row;
+}
+
+.teacherImg {
+    width: 26%;
+}
+
+.message {
+    margin-top: 9%;
+    background: url('../img/message.png');
+    width: 80%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
