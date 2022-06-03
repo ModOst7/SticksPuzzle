@@ -1,19 +1,44 @@
 .teacherContainer {
     display: flex;
-    width: 70%;
+    width: 98%;
     flex-direction: row;
 }
 
 .teacherImg {
-    width: 18%;
+    width: 10.5%;
+    margin: 0% 0% 0% 2%;
 }
 
 .message {
-    margin: 3% 0% 0% -4%;
-    padding: 4% 6% 0% 9%;
+    margin: 0% 0% 0% -4%;
+    padding: 3% 3% 2% 7%;
     background: url('../img/message.png');
-    width: 80%;
-    background-size: contain;
+    width: 63%;
+    background-size: 100% 106%;
     background-repeat: no-repeat;
     font-size: 1.3vw;
+}
+
+.exercise {
+    font-size: 1.5vw;
+    width: 42.5%;
+}
+
+.exercise-title {
+    font-size: 1.5em;
+    margin-bottom: 0%;
+    height: 6vw;
+    text-align: center;
+}
+
+.exercise-title h2, .exercise-title h4 {
+    margin: 0;
+}
+
+.exercise-title h2 {
+    font-size: 2.4vw;
+}
+
+.exercise-title h4 {
+    font-size: 1.5vw;
 }

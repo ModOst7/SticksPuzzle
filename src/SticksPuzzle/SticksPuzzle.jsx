@@ -108,11 +108,11 @@ var step_5 = [...Array(10)].map((_, i) => {
 function generateSticks() {
   return [...Array(10)].map((_, i) => ({
     id: i.toString(),
-    point1_x: i*50 + window.innerWidth/5,
-    point1_y: i*50 + window.innerWidth/5,
+    point1_x: 50 + i*100,
+    point1_y: 100,
     rotation: i%3*45,
-    point2_x: i*50 + window.innerWidth/5 + stickLength*Math.cos(Math.PI/180*(i%3)*45),
-    point2_y: i*50 + window.innerWidth/5 + stickLength*Math.sin(Math.PI/180*(i%3)*45),
+    point2_x: 50 + i*100 + stickLength*Math.cos(Math.PI/180*(i%3)*45),
+    point2_y: 100 + stickLength*Math.sin(Math.PI/180*(i%3)*45),
     isDragging: false,
     color1: "#666666",
     color2: "#666666"
@@ -370,9 +370,8 @@ const SticksPuzzle = () => {
 
 
   return (
-    <Stage className='stage' width={stageWidth*0.8} height={stageHeight*0.6} scaleX={window.innerWidth/window.screen.width} scaleY={window.innerWidth/window.screen.width}>
+    <Stage className='stage' width={stageWidth*0.8} height={stageHeight*0.5} scaleX={window.innerWidth/window.screen.width} scaleY={window.innerWidth/window.screen.width}>
       <Layer className="layer">
-        <Text text="Try to drag a stick" />
         {sticks.map((stick) => (
           <Group
           x={stick.point1_x}
