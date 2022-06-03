@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client';
 
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Stage, Layer, Circle, Text, Line, Group } from 'react-konva';
-
+import './SticksPuzzle.css';
 
  
 
@@ -349,12 +349,29 @@ const SticksPuzzle = () => {
       console.log(key);
       //if (key) setSticks(step_2);
     }
-
   }
 
+  const [stageWidth, setStageWidth] = useState(window.innerWidth);
+  const [stageHeight, setStageHeight] = useState(window.innerHeight);
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setStageWidth(window.innerWidth);
+      setStageHeight(window.innerHeight);
+    }
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array ensures that effect is only run on mount
+
+
   return (
-    <Stage width={window.innerWidth} height={window.innerHeight} scaleX={1} scaleY={1}>
-      <Layer>
+    <Stage className='stage' width={stageWidth*0.8} height={stageHeight*0.6} scaleX={window.innerWidth/window.screen.width} scaleY={window.innerWidth/window.screen.width}>
+      <Layer className="layer">
         <Text text="Try to drag a stick" />
         {sticks.map((stick) => (
           <Group

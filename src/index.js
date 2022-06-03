@@ -13,6 +13,7 @@ import SticksPuzzle from './SticksPuzzle/SticksPuzzle';
 const App = () => {
   return <>
     <Teacher />
+    <SticksPuzzle />
     </>
 };
 
