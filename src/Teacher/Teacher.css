@@ -7,9 +7,11 @@
 .teacherImg {
     width: 10.5%;
     margin: 0% 0% 0% 2%;
+    position: relative;
 }
 
 .message {
+    position: relative;
     margin: 0% 0% 0% -4%;
     padding: 3% 3% 2% 7%;
     background: url('../img/message.png');
@@ -33,6 +35,7 @@
 
 .exercise-title h2, .exercise-title h4 {
     margin: 0;
+    position: relative;
 }
 
 .exercise-title h2 {
