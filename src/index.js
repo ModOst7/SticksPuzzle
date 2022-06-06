@@ -11,10 +11,6 @@ import {useSpring, useChain, animated} from 'react-spring';
 import Teacher from './Teacher/Teacher';
 import SticksPuzzle from './SticksPuzzle/SticksPuzzle';
 
-const stepsTitle = {
-  1: 'Составьте прямоугольник, верхняя и нижняя стороны которого будут равны 3 палочкам, а левая и правая – 2.',
-  2: 'Сост222чкам, а левая и правая – 2.',
-};
 
 const App = () => {
   const props = useSpring({to: {opacity: 1}, from: {opacity: 0}, delay: 2500});
@@ -23,12 +19,25 @@ const App = () => {
   const [step, setStep] = React.useState(1);
 
   const nextStep = (n) => setStep(n);
+  const nextTitle = (text) => setStepTitle(text);
+  const toggleScreenVisible = (vis) => setScreenVisible(vis);
+
+  const propsWhiteScreen = useSpring({
+    to: screenVisible? [
+      {display: 'block'},
+      {opacity: 1},
+    ] : [
+      {opacity: 0},
+      {display: 'none'},
+    ],
+  },
+  );
 
   return <>
-    <animated.div className='whiteScreen'></animated.div>
-    <Teacher title = {stepTitle} />
+    <animated.div className='whiteScreen' style={propsWhiteScreen}></animated.div>
+    <Teacher stepTitle = {stepTitle} />
     <animated.div style={props}>
-      <SticksPuzzle screen = {screenVisible}/>
+      <SticksPuzzle screen = {screenVisible} toggleVisibility = {toggleScreenVisible} step = {step} toNextStep = {nextStep} stepTitle = {stepTitle} toNextTitle = {nextTitle} />
     </animated.div>
   </>;
 };

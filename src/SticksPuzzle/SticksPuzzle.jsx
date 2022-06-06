@@ -131,9 +131,10 @@ function generateSticks() {
 const INITIAL_STATE = generateSticks();
 
 
-const SticksPuzzle = () => {
-  const [sticks, setSticks] = React.useState(INITIAL_STATE);
-  const step = 7;
+const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, toNextTitle}) => {
+  const [sticks, setSticks] = React.useState(step_1);
+
+  // const step = 7;
 
   const handleDragStart = (e) => {
     const id = e.target.id();
@@ -247,7 +248,15 @@ const SticksPuzzle = () => {
       if (sum !== 732) key = false;
       console.log(sum);
       console.log(key);
-      if (key) setSticks(step_2);
+      if (key) {
+        toggleVisibility(true);
+        window.setTimeout(() => {
+          setSticks(step_2);
+          toggleVisibility(false);
+          toNextTitle('Составьте 2 равных треугольника из 5 палочек.');
+        }, 2000);
+        // setSticks(step_2);
+      }
     }
     if (step === 2) {
       let sum = 0;

@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 /* eslint-disable no-trailing-spaces */
-import React from 'react';
-import {useSpring, useChain, animated} from 'react-spring';
+import React, {useEffect, useRef} from 'react';
+import {useSpring, useSpringRef, useChain, animated} from 'react-spring';
 import './Teacher.css';
 
 const stepsTitle = {
@@ -11,12 +11,24 @@ const stepsTitle = {
   2: 'Сост222чкам, а левая и правая – 2.',
 };
 
-const Teacher = () => {
+const Teacher = ({stepTitle}) => {
+  const springRef = useSpringRef();
   // const AnimatedImage = animated(Image);
   const propsTeacher = useSpring({to: {left: '0%'}, from: {left: '-70%'}, delay: 1000});
   const propsMessage = useSpring({to: {opacity: 1}, from: {opacity: 0}, delay: 1500});
   const propsTitle = useSpring({to: {left: '0%'}, from: {left: '-70%'}});
-  const propsStep = useSpring({to: {opacity: 1}, from: {opacity: 0}, delay: 2000});
+  const propsStep = useSpring({
+    ref: springRef,
+    to: {opacity: 1}, 
+    from: {opacity: 0}, 
+    delay: 2000,
+  });
+
+
+  useEffect(() => {
+    console.log(springRef.current);
+  }, [stepTitle]);
+
   return (
     <>
       <div className='exercise-title'>
@@ -31,11 +43,12 @@ const Teacher = () => {
             при работе со способными к математике дошкольниками применяется занимательный материал и развлечения 
             на математическом материале: задачи-головоломки, задачи-шутки (занимательные вопросы), наглядные логические задачи. Давайте попробуем их решить.
             </animated.div>
-          <animated.div className='step' style={propsStep}>{stepsTitle[2]}</animated.div>
+          <animated.div className='step' style={propsStep}>{stepTitle}</animated.div>
         </div>
       </div>
     </>
   );
 };
+
 
 export default Teacher;
