@@ -12,7 +12,7 @@ const stepsTitle = {
 };
 
 const Teacher = ({stepTitle}) => {
-  const springRef = useSpringRef();
+   const springRef = useSpringRef();
   // const AnimatedImage = animated(Image);
   const propsTeacher = useSpring({to: {left: '0%'}, from: {left: '-70%'}, delay: 1000});
   const propsMessage = useSpring({to: {opacity: 1}, from: {opacity: 0}, delay: 1500});
@@ -23,10 +23,10 @@ const Teacher = ({stepTitle}) => {
     from: {opacity: 0}, 
     delay: 2000,
   });
-
+  useChain([springRef]);
 
   useEffect(() => {
-    console.log(springRef.current);
+    console.log(stepTitle);
   }, [stepTitle]);
 
   return (
