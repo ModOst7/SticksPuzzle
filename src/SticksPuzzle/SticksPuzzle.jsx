@@ -5,7 +5,7 @@
 
 
 import React, {useEffect, useState} from 'react';
-import {Stage, Layer, Circle, Text, Line, Group} from 'react-konva';
+import {Stage, Layer, Circle, Rect, Text, Line, Group} from 'react-konva';
 import './SticksPuzzle.css';
 
 
@@ -20,8 +20,8 @@ const step_1 = [...Array(10)].map((_, i) => ({
   point2_x: (i > 5)? (i*100 + stickLength*Math.cos(Math.PI/180*90)) : (i*100 + stickLength),
   point2_y: (i > 5)? (100 + stickLength*Math.sin(Math.PI/180*90)) : (100),
   isDragging: false,
-  color1: '#666666',
-  color2: '#666666',
+  color1: '#a45a52',
+  color2: '#a45a52',
 }));
 
 const step_2 = [...Array(10)].map((_, i) => ({
@@ -32,8 +32,8 @@ const step_2 = [...Array(10)].map((_, i) => ({
   point2_x: i*100 + stickLength*Math.cos(Math.PI/180*(i%5)*30),
   point2_y: 100 + stickLength*Math.sin(Math.PI/180*(i%5)*30),
   isDragging: false,
-  color1: '#666666',
-  color2: '#666666',
+  color1: '#a45a52',
+  color2: '#a45a52',
 }));
 
 const step_4 = [...Array(10)].map((_, i) => ({
@@ -44,8 +44,8 @@ const step_4 = [...Array(10)].map((_, i) => ({
   point2_x: i !== 6? (i*100 + stickLength*Math.cos(Math.PI/180*(i%5)*30)) : (i*100 + stickLength),
   point2_y: i !== 6? (100 + stickLength*Math.sin(Math.PI/180*(i%5)*30)) : 100,
   isDragging: false,
-  color1: '#666666',
-  color2: '#666666',
+  color1: '#a45a52',
+  color2: '#a45a52',
 }));
 
 const step_5 = [...Array(10)].map((_, i) => {
@@ -58,8 +58,8 @@ const step_5 = [...Array(10)].map((_, i) => {
       point2_x: i*100 + stickLength*Math.cos(Math.PI/180*(i%2)*120),
       point2_y: 100 + stickLength*Math.sin(Math.PI/180*(i%2)*120),
       isDragging: false,
-      color1: '#666666',
-      color2: '#666666',
+      color1: '#a45a52',
+      color2: '#a45a52',
     };
   }
   if (i === 8) {
@@ -71,8 +71,8 @@ const step_5 = [...Array(10)].map((_, i) => {
       point2_x: i*100 + stickLength*Math.cos(Math.PI/180*(i%2)*120),
       point2_y: 100 + stickLength*Math.sin(Math.PI/180*(i%2)*120),
       isDragging: false,
-      color1: '#666666',
-      color2: '#666666',
+      color1: '#a45a52',
+      color2: '#a45a52',
     };
   }
   if (i === 9) {
@@ -84,8 +84,8 @@ const step_5 = [...Array(10)].map((_, i) => {
       point2_x: i*100 + stickLength*Math.cos(Math.PI/180*(i%2)*120),
       point2_y: 100 + stickLength*Math.sin(Math.PI/180*(i%2)*120),
       isDragging: false,
-      color1: '#666666',
-      color2: '#666666',
+      color1: '#a45a52',
+      color2: '#a45a52',
     };
   }
   return {
@@ -96,8 +96,8 @@ const step_5 = [...Array(10)].map((_, i) => {
     point2_x: i*100 + stickLength*Math.cos(Math.PI/180*(i%2)*60),
     point2_y: 100 + stickLength*Math.sin(Math.PI/180*(i%2)*60),
     isDragging: false,
-    color1: '#666666',
-    color2: '#666666',
+    color1: '#a45a52',
+    color2: '#a45a52',
   };
 });
 
@@ -109,8 +109,8 @@ const step_7 = [...Array(10)].map((_, i) => ({
   point2_x: (i*100 + stickLength*Math.cos(Math.PI/180*((i%2)*90))),
   point2_y: (100 + stickLength*Math.sin(Math.PI/180*((i%2)*90))),
   isDragging: false,
-  color1: '#666666',
-  color2: '#666666',
+  color1: '#a45a52',
+  color2: '#a45a52',
 }));
 
 
@@ -123,8 +123,8 @@ function generateSticks() {
     point2_x: 50 + i*100 + stickLength*Math.cos(Math.PI/180*(i%3)*45),
     point2_y: 100 + stickLength*Math.sin(Math.PI/180*(i%3)*45),
     isDragging: false,
-    color1: '#666666',
-    color2: '#666666',
+    color1: '#a45a52',
+    color2: '#a45a52',
   }));
 }
 
@@ -170,8 +170,8 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
     tempArr = tempArr.map((stick) => {
       return {
         ...stick,
-        color1: '#666666',
-        color2: '#666666',
+        color1: '#a45a52',
+        color2: '#a45a52',
       };
     });
 
@@ -233,7 +233,7 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
 
   const checkAnswer = (step, matrix) => {
     let key = false;
-
+    console.log('step = ', step);
     if (step === 1) {
       key = true;
       let sum = 0;
@@ -253,9 +253,9 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
         window.setTimeout(() => {
           setSticks(step_2);
           toggleVisibility(false);
+          toNextStep(2);
           toNextTitle('Составьте 2 равных треугольника из 5 палочек.');
         }, 2000);
-        // setSticks(step_2);
       }
     }
     if (step === 2) {
@@ -275,7 +275,16 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
         console.log(sum);
         console.log(key);
         setSticks(step_1);
-        step = 3;
+        // step = 3;
+      }
+      if (key) {
+        toggleVisibility(true);
+        window.setTimeout(() => {
+          setSticks(step_1);
+          toggleVisibility(false);
+          toNextStep(3);
+          toNextTitle('Составьте 2 равных квадрата из 7 палочек.');
+        }, 2000);
       }
     }
     if (step === 3) {
@@ -295,6 +304,15 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
       if ( ((sum === 732) && sum4) || ((sum === 1088) && sum360) ) key = true;
       console.log(sum);
       console.log(key);
+      if (key) {
+        toggleVisibility(true);
+        window.setTimeout(() => {
+          setSticks(step_4);
+          toggleVisibility(false);
+          toNextStep(4);
+          toNextTitle('Составьте 3 равных треугольника из 7 палочек.');
+        }, 2000);
+      }
     }
     if (step === 4) {
       key = false;
@@ -313,6 +331,15 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
       if ((sum === 1452) && sum123 && sum360) key = true;
       console.log(sum);
       console.log(key);
+      if (key) {
+        toggleVisibility(true);
+        window.setTimeout(() => {
+          setSticks(step_5);
+          toggleVisibility(false);
+          toNextStep(5);
+          toNextTitle('Составьте 4 равных треугольника из 9 палочек.');
+        }, 2000);
+      }
     }
     if (step === 5) {
       key = false;
@@ -333,6 +360,15 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
       if (((sum === 2058) || (sum === 2534) || (sum === 2535) || (sum === 2355) || (sum === 2712) || (sum === 1938)) && sum0 && !fewInRow) key = true;
       console.log(sum);
       console.log(key);
+      if (key) {
+        toggleVisibility(true);
+        window.setTimeout(() => {
+          setSticks(step_1);
+          toggleVisibility(false);
+          toNextStep(6);
+          toNextTitle('Составьте 3 равных квадрата из 10 палочек.');
+        }, 2000);
+      }
     }
     if (step === 6) {
       key = true;
@@ -349,6 +385,15 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
       console.log(sum);
       console.log(key);
       // if (key) setSticks(step_2);
+      if (key) {
+        toggleVisibility(true);
+        window.setTimeout(() => {
+          setSticks(step_7);
+          toggleVisibility(false);
+          toNextStep(7);
+          toNextTitle('Составьте 2 квадрата из 10 палочек: большой и маленький.');
+        }, 2000);
+      }
     }
     if (step === 7) {
       key = true;
@@ -365,6 +410,15 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
       console.log(sum);
       console.log(key);
       // if (key) setSticks(step_2);
+      if (key) {
+        toggleVisibility(true);
+        window.setTimeout(() => {
+          // setSticks(step_7);
+          toggleVisibility(false);
+          // toNextStep(7);
+          // toNextTitle('Составьте 2 квадрата из 10 палочек: большой и маленький.');
+        }, 2000);
+      }
     }
   };
 
@@ -389,6 +443,15 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
   return (
     <Stage className='stage' width={stageWidth*0.8} height={stageHeight*0.5} scaleX={window.innerWidth/window.screen.width} scaleY={window.innerWidth/window.screen.width}>
       <Layer className="layer">
+        <Rect
+          x={20}
+          y={20}
+          width={1500}
+          height={450}
+          fill='#eaf5db'
+          shadowBlur={10}
+          cornerRadius={10}
+        />
         {sticks.map((stick) => (
           <Group
             x={stick.point1_x}
@@ -397,28 +460,17 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
             id={stick.id}
             rotation={stick.rotation}
             draggable
-            onDragStart = {handleDragStart}
-            onDragEnd = {handleDragEnd}
-            onDragMove = {handleMove}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onDragMove={handleMove}
           >
-            <Circle
-              x={0}
-              y={0}
-              radius = {10}
-              numPoints={5}
-              innerRadius={20}
-              outerRadius={stickLength}
-              fill={stick.color1}
-              opacity={0.8}
-              scaleX={stick.isDragging ? 1.2 : 1}
-              scaleY={stick.isDragging ? 1.2 : 1}
-
-            />
             <Line
-
               points={[0, 0, 0 + stickLength, 0]}
-              stroke="black"
+              stroke="#BA8C63"
+              lineCap='round'
+              lineJoin='round'
               strokeWidth = {5}
+              shadowBlur={5}
               hitStrokeWidth = {10}
             />
             <Text
@@ -427,17 +479,30 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
               y={5}
             />
             <Circle
+              x={0}
+              y={0}
+              shadowBlur={2}
+              radius={5}
+              numPoints={5}
+              innerRadius={20}
+              outerRadius={stickLength}
+              fill={stick.color1}
+              opacity={1}
+              scaleX={stick.isDragging ? 1.2 : 1}
+              scaleY={stick.isDragging ? 1.2 : 1}
+            />
+            <Circle
               x={0 + stickLength}
               y={0}
-              radius = {10}
+              shadowBlur={2}
+              radius = {5}
               numPoints={5}
               innerRadius={20}
               outerRadius={40}
               fill={stick.color2}
-              opacity={0.8}
+              opacity={1}
               scaleX={stick.isDragging ? 1.2 : 1}
               scaleY={stick.isDragging ? 1.2 : 1}
-
             />
           </Group>
         ))}

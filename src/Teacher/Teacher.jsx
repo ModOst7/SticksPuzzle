@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 /* eslint-disable no-trailing-spaces */
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useSpring, useSpringRef, useChain, animated} from 'react-spring';
 import './Teacher.css';
 
@@ -12,6 +12,7 @@ const stepsTitle = {
 };
 
 const Teacher = ({stepTitle}) => {
+  const [show, set] = useState(false);
    const springRef = useSpringRef();
   // const AnimatedImage = animated(Image);
   const propsTeacher = useSpring({to: {left: '0%'}, from: {left: '-70%'}, delay: 1000});
@@ -23,7 +24,21 @@ const Teacher = ({stepTitle}) => {
     from: {opacity: 0}, 
     delay: 2000,
   });
-  useChain([springRef]);
+
+  const springRef1 = useSpringRef();
+  const propsStepSuccess1 = useSpring({
+    ref: springRef1,
+    from: {opacity: 0.5, color: 'red'},
+    to: {opacity: 1, color: '#aa0000'},
+    delay: 2000,
+  });
+  /* const springRef2 = useSpringRef();
+  const propsStepSuccess2 = useSpring({
+    from: {opacity: 0, color: 'red'},
+    to: {opacity: 1, color: '#0000aa'},
+  }); */
+
+  useChain([springRef1]);
 
   useEffect(() => {
     console.log(stepTitle);
@@ -43,7 +58,7 @@ const Teacher = ({stepTitle}) => {
             при работе со способными к математике дошкольниками применяется занимательный материал и развлечения 
             на математическом материале: задачи-головоломки, задачи-шутки (занимательные вопросы), наглядные логические задачи. Давайте попробуем их решить.
             </animated.div>
-          <animated.div className='step' style={propsStep}>{stepTitle}</animated.div>
+          <animated.div className='step' style={propsStepSuccess1}>{stepTitle}</animated.div>
         </div>
       </div>
     </>
