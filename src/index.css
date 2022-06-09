@@ -1,5 +1,9 @@
+* {
+  font-family: Calibri; 
+}
 html, body, #root {
   height: 100%;
+  overflow: hidden;
 }
 body {
   margin: 0;
@@ -15,10 +19,17 @@ code {
     monospace;
 }
 
+.stage-container {
+  position: absolute;
+}
+
 .whiteScreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 1);
   background-image: url('./img/success.png');
   background-repeat: no-repeat;
   background-size: 13%;
@@ -29,8 +40,9 @@ code {
   z-index: 5;
 }
 
-.whiteScreen img {
-    width: 12%;
-    margin-left: 50%;
-    margin-top: 30%;
+.whiteScreen span {
+  font-size: 1.3vw;
+  margin-top: 20%;
+  text-align: center;
+  width: 40%;
 }

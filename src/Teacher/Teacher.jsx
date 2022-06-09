@@ -6,44 +6,38 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useSpring, useSpringRef, useChain, animated} from 'react-spring';
 import './Teacher.css';
 
-const stepsTitle = {
-  1: 'Составьте прямоугольник, верхняя и нижняя стороны которого будут равны 3 палочкам, а левая и правая – 2.',
-  2: 'Сост222чкам, а левая и правая – 2.',
-};
-
-const Teacher = ({stepTitle}) => {
+const Teacher = ({stepTitle, step}) => {
   const [show, set] = useState(false);
-   const springRef = useSpringRef();
+   const titleRef = useSpringRef();
+   const teacherRef = useSpringRef();
+   const messageRef = useSpringRef();
   // const AnimatedImage = animated(Image);
-  const propsTeacher = useSpring({to: {left: '0%'}, from: {left: '-70%'}, delay: 1000});
-  const propsMessage = useSpring({to: {opacity: 1}, from: {opacity: 0}, delay: 1500});
-  const propsTitle = useSpring({to: {left: '0%'}, from: {left: '-70%'}});
-  const propsStep = useSpring({
-    ref: springRef,
-    to: {opacity: 1}, 
-    from: {opacity: 0}, 
-    delay: 2000,
-  });
+  const propsTitle = useSpring({ref: titleRef, to: {left: '0%'}, from: {left: '-70%'}});
+  const propsTeacher = useSpring({ref: teacherRef, to: {left: '0%'}, from: {left: '-70%'}});
+  const propsMessage = useSpring({ref: messageRef, to: {opacity: 1, transform: 'translate(0px, 0px)'}, from: {opacity: 0, transform: 'translate(-200px, 0px)'}});
 
+
+  let n = 0;
   const springRef1 = useSpringRef();
   const propsStepSuccess1 = useSpring({
     ref: springRef1,
-    from: {opacity: 0.5, color: 'red'},
-    to: {opacity: 1, color: '#aa0000'},
-    delay: 2000,
+    loop: (step === 1)? false : () => 4 > n++,
+    from: {opacity: 0, color: 'black'},
+    to: {opacity: 1, color: 'black'},
+    config: {duration: 500},
   });
   /* const springRef2 = useSpringRef();
   const propsStepSuccess2 = useSpring({
     from: {opacity: 0, color: 'red'},
     to: {opacity: 1, color: '#0000aa'},
   }); */
-
-  useChain([springRef1]);
+  console.log(springRef1.current);
+   useChain([titleRef, teacherRef, messageRef, springRef1]);
 
   useEffect(() => {
-    console.log(stepTitle);
+    console.log(stepTitle === 'Составьте прямоугольник, верхняя и нижняя стороны которого будут равны 3 палочкам, а левая и правая – 2.');
   }, [stepTitle]);
-
+ 
   return (
     <>
       <div className='exercise-title'>

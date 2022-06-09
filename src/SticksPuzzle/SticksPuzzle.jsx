@@ -131,7 +131,7 @@ function generateSticks() {
 const INITIAL_STATE = generateSticks();
 
 
-const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, toNextTitle}) => {
+const SticksPuzzle = ({exerciseCoplete, screen, toggleVisibility, step, toNextStep, stepTitle, toNextTitle}) => {
   const [sticks, setSticks] = React.useState(step_1);
 
   // const step = 7;
@@ -411,10 +411,11 @@ const SticksPuzzle = ({screen, toggleVisibility, step, toNextStep, stepTitle, to
       console.log(key);
       // if (key) setSticks(step_2);
       if (key) {
+        exerciseCoplete();
         toggleVisibility(true);
         window.setTimeout(() => {
           // setSticks(step_7);
-          toggleVisibility(false);
+          // toggleVisibility(false);
           // toNextStep(7);
           // toNextTitle('Составьте 2 квадрата из 10 палочек: большой и маленький.');
         }, 2000);
